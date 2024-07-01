@@ -18,11 +18,20 @@ wss.on('connection', function connection(userSocket) {
     userSocket.on('message', function message(data) {
         const parsedData = JSON.parse(data as unknown as string);
         if (parsedData.type === "SUBSCRIBE") {
-            usersMap.set(id, {
-                ws: userSocket,
-                rooms: [parsedData.roomId]
+            let user = usersMap.get(id);
+
+            if(!user) {
+                usersMap.set(id, {
+                    ws: userSocket,
+                    rooms: [parsedData.roomId]
+                }
+                );
+            } else {
+                if(!user.rooms.includes(parsedData.roomId)) {
+                    user.rooms.push(parsedData.roomId);
+                }
+                usersMap.set(id, user);
             }
-            );
         }
         if (parsedData.type === "SENDMESSAGE") {
             const message = parsedData.message;

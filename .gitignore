@@ -1,0 +1,36 @@
+target/
+.project
+.settings
+.classpath
+.DS_Store
+.checkstyle
+
+# VS Code
+.vscode/
+.factorypath
+
+# IntelliJ / IDEA
+.idea/
+.run/
+*.iml
+*.ipr
+*.iws
+
+website
+
+# Other
+*~
+.notes
+**/bin
+*.jar
+*.bak
+dist/
+node_modules
+
+python-sdk/dist
+python-sdk/kiota_tmp
+python-sdk/apicurioregistrysdk/client
+python-sdk/openapi.json
+__pycache__
+
+.env
