@@ -33,6 +33,13 @@ wss.on('connection', function connection(userSocket) {
                 usersMap.set(id, user);
             }
         }
+        if (parsedData.type === "UNSUBSCRIBE") {
+            const roomId = parsedData.roomId;
+            let user = usersMap.get(id);
+            if(user && user.rooms.includes(roomId)) {
+                user.rooms = user.rooms.filter(x => x !== parsedData.roomId);
+            }
+        }
         if (parsedData.type === "SENDMESSAGE") {
             const message = parsedData.message;
             const roomId = parsedData.roomId;
